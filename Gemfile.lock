@@ -4,10 +4,10 @@ GEM
     rack (2.2.3)
 
 PLATFORMS
-  x86_64-darwin-18
+  ruby
 
 DEPENDENCIES
-  rack
+  rack (= 2.2.3)
 
 BUNDLED WITH
    2.2.7

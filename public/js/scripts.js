@@ -3,7 +3,7 @@ const getCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         if (!position || !position.coords) {
-          return resolve('Can`t find your position. Where you at?');
+          return resolve({ errorMessage: 'Can`t find your position. Where you at?' });
         }
 
         const { latitude, longitude, accuracy } = position.coords;
@@ -12,9 +12,9 @@ const getCurrentPosition = () => {
       },
       (err) => {
         if (err && err.code && err.code === 1) {
-          return resolve('Denied! Not Allowed! Nope!');
+          return resolve({ errorMessage: 'Denied! Not Allowed! Nope!' });
         }
-        return reject('ERROR');
+        return reject({ errorMessage: 'ERROR' });
       }
     );
   });
@@ -25,11 +25,11 @@ const stopLoader = () => {
   loader.style.display = 'none';
 }
 
-const renderError = (msg) => {
+const renderError = ({ errorMessage }) => {
   const error  = document.querySelector('#error');
   stopLoader();
 
-  error.append(msg);
+  error.append(errorMessage);
   error.style.display = 'block';
 }
 
@@ -49,9 +49,9 @@ const renderResults = ({ latitude, longitude, accuracy }) => {
 const init = async () => {
   const respond = await getCurrentPosition();
 
-  typeof respond === 'object'
-    ? renderResults(respond)
-    : renderError(respond);
+  respond.errorMessage
+    ? renderError(respond)
+    : renderResults(respond);
 };
 
 init();

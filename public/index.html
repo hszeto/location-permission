@@ -11,6 +11,7 @@
   <style>
     body {
       align-items: center;
+      color: DimGray;
       display: flex;
       font-family: Arial, Helvetica, sans-serif;
       height: 100vh;
@@ -18,13 +19,21 @@
       margin: 0;
     }
 
+    #error {
+      color: red;
+    }
+
+    .hide {
+      display: none;
+    }
+
     #loader {
-      border: 16px solid #f3f3f3; /* Light grey */
-      border-top: 16px solid #3498db; /* Blue */
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
       animation: spin 2s linear infinite;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      height: 120px;
+      width: 120px;
     }
 
     @keyframes spin {
@@ -32,18 +41,19 @@
       100% { transform: rotate(360deg); }
     }
   </style>
+
+  <script src="js/scripts.js"></script>
 </head>
 
 <body>
   <div id="loader"></div>
-  <script src="js/scripts.js"></script>
 
-  <div id="results" style="display: none;">
+  <div id="results" class="hide">
     <h1>Latitude: <span id="lat"></span></h1>
     <h1>Longitude: <span id="long"></span></h1>
     <h1>Accuracy: <span id="accuracy"></span></h1>
   </div>
 
-  <div id="error" style="color: red; display: none;"></div>
+  <div id="error" class="hide"></div>
 </body>
 </html>
